@@ -9,14 +9,22 @@
     <link rel="stylesheet" href="./style.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 <header>
-    <div class="navBar" id="myNavBar">
+    <nav class="navBar" id="myNavBar">
+    <div class="navTop">
+
         <a href="#home" 
-            class="headerTitle">
-            About<span>Me.</span>
+        class="headerTitle">
+        About<span>Me.</span>
         </a>
+        <a 
+             href="javascript:void(0);" class="hamburger" onclick="hamburgerSwitch()">
+          <i class="fa fa-bars"></i>
+        </a>
+    </div>
         <a class="navItem active"
              href="#home" id="navHome">HOME</a>
         <a class="navItem"
@@ -29,20 +37,17 @@
              href="#exp">RESUME</a>
         <a class="navItem"
              href="#">BLOG</a>
-        <a class="navItem"
+        <a class="navItem navContact"
              href="#contact">CONTACT</a>
-        <a 
-             href="javascript:void(0);" class="hamberger" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
+        
+    </nav>
 </header>
       
       
     <div class="heroSection">
 
         <!-- home -->
-        <div class="heroHome">
+        <section class="heroHome">
         <div class="heroInnerDiv" id="home">
             <div class="secLeft homeLeft">
                 <h4>Hello, Welcome</h4>
@@ -65,10 +70,10 @@
                 >
             </div>
         </div>
-        </div>
+        </section>
 
         <!-- about -->
-        <div class="heroAbout">
+        <section class="heroAbout">
         <div class="heroInnerDiv" id="about">
             <div class="secLeft aboutLeft">
                 <div class="aboutImageBackground">
@@ -93,10 +98,10 @@
                 </div>
             </div>
         </div>
-        </div>
+        </section>
 
         <!-- service -->
-        <div class="heroService">
+        <section class="heroService">
         <div class="heroInnerDiv" id="service">
             <div class="serviceTop">
                 <h2 class="secTitle">
@@ -166,10 +171,10 @@
                 </div>
             </div>            
         </div>
-        </div>
+        </section>
 
         <!-- portfolio -->
-        <div class="heroPortfolio">
+        <section class="heroPortfolio">
             <div class="heroInnerDiv" id="portfolio">
                 <div class="portfolioTop">
                     <h2 class="secTitle">
@@ -191,10 +196,10 @@
                     </div>
                 </div>
             </div>  
-        </div>
+        </section>
 
         <!-- experice -->
-        <div class="heroExp">
+        <section class="heroExp">
         <div class="heroInnerDiv" id="exp">
             <div class="expTop">
                 <h2 class="secTitle expTitle">
@@ -249,10 +254,10 @@
                 </div>
             </div>            
         </div>
-        </div>
+        </section>
 
         <!-- contact -->
-        <div class="heroContact">
+        <section class="heroContact">
         <div class="heroInnerDiv" id="contact">
             <div class="contactTop">
                 <h2 class="secTitle">
@@ -292,8 +297,12 @@
                 <!--  -->
                     <div class="contactUsForm">
                         <form >
-                          <input type="text" id="formName" name="formName" placeholder="Name">
-                          <textarea id="formMessage" name="formMessage" placeholder="Message"></textarea>
+                          <input 
+                          type="text" id="formName" name="formName"
+                          required placeholder="Name">
+                          <textarea 
+                          required
+                          id="formMessage" name="formMessage" placeholder="Message"></textarea>
                           <input 
                           class="contactSubmitBtn"
                           type="submit" value="Contact Us">
@@ -302,11 +311,11 @@
                 </div>
             </div>
         </div>
-        </div>
+        </section>
 
         <!-- About -->
 
-        <div class="heroFooter">
+        <section class="heroFooter">
             <div class="heroInnerDiv" id="footer">
                 <h2 class="secTitle">
                     AboutMe.
@@ -365,7 +374,7 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </section>
 
     </div>
     

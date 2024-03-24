@@ -52,7 +52,7 @@ body{
     margin:var(--margin-large);
 }
   
-#navHome, .hamberger{
+#navHome, .hamburger{
     margin-left: auto;
 }
 
@@ -62,6 +62,11 @@ body{
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    align-self: center;
+}
+
+.navBar a:not(:first-child):hover{
+    color: var(--text-color3);
 }
 
 .navItem{
@@ -70,18 +75,32 @@ body{
     font-weight: var(--font-weight-400);
 }
 
-.hamberger{
+.hamburger{
     font-size: var(--font-size-tilte) !important;
     color: var(--text-color1) !important;
     color: var(--text-color5);
     font-weight: var(--font-weight-700);
 }
 
+.closeBtn{
+    color: red !important;
+}
+
 .active{
     color: var(--text-color1);
 }
+
+.navTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
   
-.navBar .hamberger {
+.navContact{
+    text-align: center !important;
+  }
+
+.navBar .hamburger {
     display: none;
 }
 
@@ -120,6 +139,7 @@ body{
 .secBtn{
     cursor: pointer;
 }
+
 
 .secBtn>a{
     font-weight: var(--font-weight-400);
@@ -165,6 +185,10 @@ body{
     height: 427px;
     width: 427px;
     border-radius: 24px;
+    overflow: hidden;
+    object-fit: cover;
+
+
 }
 
 /* About */
@@ -195,6 +219,8 @@ background-color: var(--bg-color1);
     top: -6%; 
     left: 6%; 
     transform: scaleX(-1);
+    overflow: hidden;
+    object-fit: cover;
 }
 
 
@@ -277,7 +303,8 @@ background-color: var(--bg-color2);
 .portfolioBottom>div>img{
     border-radius: 12px;
     height: 100%;
-    /* width: 100%; */
+    overflow: hidden;
+    object-fit: cover;
 }
 
 .portfolioBottom{
@@ -432,6 +459,10 @@ background-color: var(--bg-color2);
     font-size: var(--font-size2);
 }
 
+.contactSubmitBtn{
+    border: none;
+}
+
 /* Footer/ About me */
 
 .heroFooter{
@@ -471,36 +502,6 @@ background-color: var(--bg-color2);
 }
 
 @media screen and (max-width: 1200px) {
-
-    .navBar{
-        display: block;
-    }
-
-    .navBar a:not(:first-child) {
-      display: none;
-    }
-    
-    .navBar a.hamberger {
-      float: right;
-      display: block;
-    }
-
-    .navBar.responsive .hamberger {
-        position: absolute;
-        top: 0;
-        right: 118px;
-      }
-
-      .navBar.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-      }
-
-      .navBar a:not(:first-child):not(:last-child) {
-        text-align: center;
-      }
-      
 
     .secTitle{
         font-size: 32px;
@@ -558,13 +559,32 @@ background-color: var(--bg-color2);
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1020px){
+    .navBar{
+        display: block;
+    }
 
-    .navBar.responsive .hamberger {
-        position: absolute;
-        top: 0;
-        right: 78px;
+    .navBar a:not(:first-child) {
+      display: none;
+    }
+    
+    .navBar a.hamburger {
+      float: right;
+      display: block;
+    }
+
+    .navBar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
       }
+
+      .navBar a:not(:first-child):not(:last-child) {
+        text-align: center;
+      }
+}
+
+@media screen and (max-width: 800px) {
 
     .secTitle{
         font-size: 28px;
@@ -679,12 +699,7 @@ background-color: var(--bg-color2);
 }
 
 @media screen and (max-width: 512px) {
-   
-    .navBar.responsive .hamberger {
-        position: absolute;
-        top: 0;
-        right: 34px ;
-      }
+  
     .secTitle{
         font-size: 24px;
     }
@@ -745,7 +760,6 @@ background-color: var(--bg-color2);
         width: 120px;
         height: 40px;
       }
-
 }
 
 @media screen and (max-width: 280px) {
