@@ -42,35 +42,53 @@ body{
     padding: 0;
 }
 
-header{
+ header{
     background-color: var(--bg-color1);
 }
 
-.navBar{
+.navBar {
+    overflow: hidden;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin:var(--margin-large);
 }
-
-.list{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style-type: none;
-    gap: 15px;
+  
+#navHome, .hamberger{
+    margin-left: auto;
 }
 
-.navItem>a{
+.navBar a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
     text-decoration: none;
+}
+
+.navItem{
     color: var(--text-color5);
     font-size: var(--font-size2);
+    font-weight: var(--font-weight-400);
+}
+
+.hamberger{
+    font-size: var(--font-size-tilte) !important;
+    color: var(--text-color1) !important;
+    color: var(--text-color5);
+    font-weight: var(--font-weight-700);
+}
+
+.active{
+    color: var(--text-color1);
+}
+  
+.navBar .hamberger {
+    display: none;
 }
 
 .headerTitle{
+    font-size: var(--font-size-tilte) ;
+    font-weight: var(--font-weight-700) !important;
     color: var(--text-color1);
-    font-size:var(--font-size-tilte) ;
-    /* font-weight: ; */
 }
 
 .headerTitle>span{
@@ -83,13 +101,13 @@ header{
     padding: 6% 0;
 }
 
-.secTitle{
+.secTitle, .navTitle{
     color: var(--text-color2);
     font-size: var(--font-size3-section-title);
     font-weight: var(--font-weight-700);
 }
 
-.secTitle>span{
+.secTitle>span, .navTitle>span{
     color: var(--text-color3);
 }
 
@@ -366,36 +384,43 @@ background-color: var(--bg-color2);
     color: var(--text-color2);
 }
 
-.conBtmRight>form{
+.conBtmRight>div>form{
     display: flex;
     align-items: start;
     justify-content: center;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
 }
 
-.contactName{
-    height: 63px;
+.contactUsForm input[type="text"] {
     width: 250px;
-}
-
-.contactMessage{
-    height: 116px;
-    width: 350px;    
-
-}
-
-.conBtmRight>form>input{
+    padding: 16px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 10px;
     background-color: #1f2937;
+    color: var(--text-color1);
+    margin-top: 20px;
+}
+  
+.contactUsForm textarea {
+    height: 116px;
+    width: 350px;
+    padding: 15px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    background-color: #1f2937;
+    color: var(--text-color1);
 }
 
-.contactName::placeholder, .contactMessage::placeholder  {
+.contactUsForm input[type="text"]::placeholder, .contactUsForm textarea::placeholder{
     color: var(--text-color2);
     font-weight: var(--font-weight-400);
     font-size: var(--font-size2); 
 }
 
-.contactSubmitBtn{
+.contactUsForm input[type="submit"] {
     background-color: var(--text-color3);
     padding: 16px 20px;
     border-radius: 4px;
@@ -407,9 +432,76 @@ background-color: var(--bg-color2);
     font-size: var(--font-size2);
 }
 
+/* Footer/ About me */
 
+.heroFooter{
+    background-color: var(--bg-color1);
+}
+
+#footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.socialIcons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.socIcon:hover{
+    cursor: pointer;
+}
+
+/* Change fill color on hover */
+.socIcon svg {
+    width: 24px; 
+    height: 24px;
+    transition: fill 0.3s; 
+}
+
+.socIcon:hover svg path{
+    fill: var(--text-color3); 
+}
 
 @media screen and (max-width: 1200px) {
+
+    .navBar{
+        display: block;
+    }
+
+    .navBar a:not(:first-child) {
+      display: none;
+    }
+    
+    .navBar a.hamberger {
+      float: right;
+      display: block;
+    }
+
+    .navBar.responsive .hamberger {
+        position: absolute;
+        top: 0;
+        right: 118px;
+      }
+
+      .navBar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+
+      .navBar a:not(:first-child):not(:last-child) {
+        text-align: center;
+      }
+      
+
     .secTitle{
         font-size: 32px;
         font-weight: var(--font-weight-700);
@@ -467,6 +559,13 @@ background-color: var(--bg-color2);
 
 
 @media screen and (max-width: 800px) {
+
+    .navBar.responsive .hamberger {
+        position: absolute;
+        top: 0;
+        right: 78px;
+      }
+
     .secTitle{
         font-size: 28px;
     }
@@ -476,6 +575,13 @@ background-color: var(--bg-color2);
         gap: 30px;
     }
 
+    .homeLeft, .aboutRight{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     #about{
         flex-direction: column;
         gap: 30px;
@@ -557,9 +663,28 @@ background-color: var(--bg-color2);
     .conBtmLft>h4{
         font-size: 12px;
     }
+
+    .contactUsForm{
+        align-items: center;
+    }
+
+    .conBtmRight>div>form{
+        align-items: center;
+        justify-content: center;
+    }
+    
+      .contactUsForm input[type="text"], .contactUsForm textarea  {
+        width: 250px;
+      }
 }
 
 @media screen and (max-width: 512px) {
+   
+    .navBar.responsive .hamberger {
+        position: absolute;
+        top: 0;
+        right: 34px ;
+      }
     .secTitle{
         font-size: 24px;
     }
@@ -610,9 +735,25 @@ background-color: var(--bg-color2);
         font-size: 24px;
     }
 
+    .contactUsForm input[type="text"], .contactUsForm textarea  {
+        width: 220px;
+      }
+      
+     
+      .contactUsForm input[type="submit"] {
+        padding: 8px 12px;
+        width: 120px;
+        height: 40px;
+      }
+
 }
 
 @media screen and (max-width: 280px) {
+
+    .navBar>a{
+        font-size: var(--font-size2) !important;
+    }
+
     .homeRight>img{
         height: 200px;
         width: 200px;
@@ -641,4 +782,7 @@ background-color: var(--bg-color2);
     .expTitle{
         font-size: 18px;
     }
+    .contactUsForm input[type="text"], .contactUsForm textarea  {
+        width: 180px;
+      }
 }
