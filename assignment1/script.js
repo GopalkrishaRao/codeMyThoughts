@@ -10,15 +10,15 @@ function hamburgerSwitch() {
     } else {
       navBar.className = "navBar";
       hamburgerMenu.innerHTML=" <i class='fa fa-bars'></i>"
-    }
-  }
+    };
+  };
 
 // Close hamburger menu when cliked on nav items
   navItems.forEach(navItem => {
     navItem.addEventListener('click', () => {
-        if (navBar.classList.contains("responsive")) {
+        if (navBar.classList.contains("responsive")){
             navBar.classList.remove("responsive");
             hamburgerMenu.innerHTML = " <i class='fa fa-bars'></i>";
-        }
+        };
     });
 });
