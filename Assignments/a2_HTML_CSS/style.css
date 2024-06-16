@@ -1,0 +1,395 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --white1:#ffffff;
+    --white2:#E6EAEF;
+    --white3:#E7EFFC;
+    --fontColor4:#161439;
+    --poppins:"Poppins", sans-serif;
+    --inter:"Inter", sans-serif;
+}
+
+/* *{
+    box-sizing: border-box;
+    outline: 3px solid limegreen !important;
+} */
+
+body{
+margin: 0;
+padding: 0;
+}
+
+header{
+    width: 100%;
+    height: 46.5px;
+    background-color: #161439; 
+}
+
+.headerLeft, .headerRight{
+    display: inline-block;
+    padding-top: 10px;
+}
+.headerLeft>*, .headerRight>*{
+    vertical-align: middle;
+}
+
+.locationLogo{
+    width: 16px;
+    height: 20px;
+    color: var(--white1);
+    opacity: 60%;
+    padding-right: 8px;
+}
+
+.mailLogo{
+    width: 20px;
+    height: 14px;
+    color: var(--white1);
+    opacity: 60%;
+    padding: 0 8px 8px 16px;
+}
+
+.location, .mail, .phoneNo {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24.5px;
+    color: var(--white2);
+}
+
+.headerLeft{
+    margin-left: 5%;
+    float: left;
+}
+
+.headerRight{
+    margin-right: 5%;
+    float: right;
+}
+
+.phoneLogo{
+    width: 20px;
+    height: 20px;
+    color: var(--white1);
+    opacity: 60%;
+    padding-right: 8px;
+}
+
+.follow{
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24.5px;
+    color: var(--white1);
+    opacity: 50%;
+    padding-left: 16px;
+}
+
+.socialIcons>*{
+    color:var(--white3);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.dblock>*{
+    vertical-align: middle;
+}
+
+.break{
+    display: none;
+}
+
+/* Nav style */
+nav{
+    height: 50px;
+    padding: 20px 0;
+}
+
+nav span{
+    display: inline-block;
+    vertical-align: middle; /* Align the inline item vertically */
+    line-height: normal;
+}
+
+.logo{
+    margin-left: 5%;
+}
+
+.login-btn, .hamburger{
+    margin-right: 5%;
+}
+
+/* General Styles for UL */
+menuUl {
+    list-style-type: none;
+    padding: 0;
+    padding: 0 20px 0 60px;
+    display: block;
+}
+
+menuUl, .menuItems{
+    display: inline-block;
+}
+
+menuUl .menuItems {
+    margin-right: 20px; 
+}
+
+.menuItems>a {
+    text-decoration: none;
+    color: var(--fontColor4); 
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    cursor: pointer;
+}
+
+/* Styles for SPAN containing the icon */
+menuUl .menuItems span {
+    margin-left: 5px; /* Space between text and icon */
+    height: 14px;
+    width: 14px;
+    color: var(--fontColor4);
+    /* vertical-align: middle; */
+}
+
+.navLiDownArrow{
+    margin: 0 0 0 20px;
+    padding-top: 16px;
+}
+
+.searchBar {
+    border: 1px solid #343A40;
+    border-radius: 28px;
+    padding: 6px 10px 6px 10px;
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.categories {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    padding-top: 6px;
+}
+
+.categories span {
+    margin: 0 5px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24.5px;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.menuItems{
+    margin: 0;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    border-left: 1px solid #BDBABB;
+    padding-left: 8px;
+}
+
+.search-input::placeholder{
+    font-family: var(--poppins);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+}
+
+.search-icon {
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: middle; 
+}
+
+.icons {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.icon-wrapper {
+    display: inline-block;
+    /* margin: 0 5px; */
+    position: relative;
+    text-decoration: none;
+}
+
+.svg-icon-wrappe{
+    border: 1px solid #7F7E97;
+    border-radius: 50%;
+    height: 22px;
+    padding: 10px;
+}
+
+.badge{
+    font-family: var(--inter);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24.5px;
+    text-align: left;
+    color:#161439;
+    border-radius: 50%;
+    padding: 0px 8px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #FFC224;
+}
+
+.login-btn {
+    background-color: #FFC224;
+    border: 1px solid #06235B30;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 20px;
+    vertical-align: middle;
+    font-family: var(--inter);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+.hamburger{
+    display: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+@media screen and (max-width: 1204px) {
+    .hamburger{
+     display: inline;
+     float: inline-end;
+    }
+ 
+    .logo{
+     float: left;
+     }
+ 
+    .navMenu, .searchBar, .icons, .login-btn{
+     display: none;
+    }
+ 
+    .fa-bars{
+     padding-top: 12px;
+    }
+ }
+
+@media screen and (max-width: 1024px) {
+    header {
+        height: auto;
+    }
+
+    .headerLeft, .headerRight {
+        float: none;
+        width: 100%;
+        text-align: center;
+        padding-top: 5px;
+    }
+
+    .headerLeft {
+        margin-left: 0;
+    }
+
+    .headerRight {
+        margin-right: 0;
+    }
+
+    .headerRight .dblock {
+        display: inline-block;
+        margin-top: 5px;
+    }
+
+    .break {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .headerLeft, .headerRight {
+        padding-top: 10px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .headerLeft .dblock, .headerRight .dblock {
+        display: inline-block;
+        text-align: center;
+        margin: 5px 0;
+    }
+
+    .headerLeft span, .headerRight span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .headerLeft .locationLogo, .headerRight .phoneLogo, .headerLeft .mailLogo {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+
+    .headerLeft .location, .headerLeft .mail, .headerRight .phoneNo {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .socialIcons>* {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 2px;
+    }
+
+    .break {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .headerLeft, .headerRight {
+        text-align: center;
+    }
+
+    .headerLeft span, .headerRight span {
+        display: block;
+    }
+
+    .headerRight .dblock {
+        margin-top: 5px;
+    }
+
+    .break {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    header {
+        padding: 5px 0;
+    }
+
+    .headerLeft, .headerRight {
+        text-align: center;
+        width: 100%;
+    }
+
+    .headerLeft span, .headerRight span {
+        display: block;
+    }
+
+    .headerRight .dblock {
+        margin-top: 5px;
+    }
+}
