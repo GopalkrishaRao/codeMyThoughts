@@ -274,7 +274,10 @@ nav{
     font-weight: 600;
     line-height: 18px;
 }
-
+.loginBtn a{
+    text-decoration: none;
+    color:#161439;
+}
 /* All course */
 .all-course-section{
     background-image:  url('../assets/allcourceBackground.jpeg');
@@ -366,7 +369,7 @@ nav{
     left: 810px;
 }
 
-/* hero */
+/* main */
 main{
     display: flex;
     justify-content: space-between;
@@ -440,7 +443,8 @@ main{
     line-height: 16px;
     color: #D7D7D7;
 }
-    
+
+/* hero section */
 .hero{
     width: 68%;
 }
@@ -508,6 +512,21 @@ main{
 .h-filt-list{
     color: #6196EA;
     cursor: pointer;
+    border: 2px solid #5751E1;
+    border-radius: 4px;
+    height: 30px;
+    width: 30px;
+}
+
+.h-filt-input{
+    line-height: 30px;
+}
+.h-filt-input label{
+    padding:0  10px;
+}
+.h-filt-input select{
+    background: inherit;
+    margin-right: 10px;
 }
 
 /* cards */
@@ -530,6 +549,8 @@ main{
     align-items: center;
     flex-wrap: wrap;
 }
+
+
 
 /* card  */
 .hero-card {
@@ -686,7 +707,7 @@ main{
   /* footer */
   footer{
     background: #1C1A4A;
-    padding: 40px 0;
+    padding: 40px 0 0 0;
   }
 
   .footer-top{
@@ -804,6 +825,10 @@ nav{
 /* Hero */
 main{
     flex-direction: column-reverse;
+}
+
+.filter-container{
+    height: 350px;
 }
 
 .filter{

@@ -504,8 +504,22 @@ main {
 
 .h-filt-list{
     color: #6196EA;
+    cursor: pointer;
+    border: 2px solid #5751E1;
+    border-radius: 4px;
+    height: 30px;
+    width: 30px;
 }
-
+.h-filt-input{
+    line-height: 30px;
+}
+.h-filt-input label{
+    padding:0  10px;
+}
+.h-filt-input select{
+    background: inherit;
+    margin-right: 10px;
+}
 /* cards */
 .hero{
     float: right;
