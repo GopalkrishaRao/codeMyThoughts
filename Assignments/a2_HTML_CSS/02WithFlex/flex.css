@@ -263,18 +263,23 @@ nav{
     padding-bottom: 16px;
 }
 
-.loginBtn{
+.btnPrimary{
     background-color: #FFC224;
-    border: 1px solid #06235B30;
-    border-radius: 25px;
     cursor: pointer;
-    padding: 10px 20px;
     font-family: var(--inter);
-    font-size: 15px;
     font-weight: 600;
     line-height: 18px;
 }
-.loginBtn a{
+
+.loginBtn{
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #06235B30;
+    font-size: 15px;
+
+}
+
+.btnPrimary a{
     text-decoration: none;
     color:#161439;
 }
@@ -652,7 +657,6 @@ main{
   }
   
   .h-c-btn{
-    background-color:#FFC224;
     padding: 11px 20px 11px 20px;
     gap: 0px;
     border-radius: 50px;
@@ -663,7 +667,6 @@ main{
     font-weight: 600;
     line-height: 18px;
     color: #161439;
-    cursor: pointer;
   }
   
   .h-c-btn-arrow{

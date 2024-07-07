@@ -1,0 +1,1 @@
+* [Figma Desing](https://www.figma.com/design/MiM3Gb59oqb41HBAvBduxB/70%2B-Online-Course-Website-Template-(Community)?node-id=6512-2&t=Em0rWb73g2vg9g2M-0)
