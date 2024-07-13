@@ -9,14 +9,13 @@
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
    
    
-<form  method="POST">
+<form  method="POST" action="/notes">
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
      
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
        
-
         <div class="col-span-full">
           <label for="body" class="block text-sm font-medium leading-6 text-gray-900">Body</label>
           <div class="mt-2">
