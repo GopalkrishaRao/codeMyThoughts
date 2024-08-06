@@ -6,7 +6,7 @@ try {
     if (isset($_GET['code'])) {
         // Authenticate code from Google OAuth Flow
         $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-        
+
         // Check if token retrieval was successful
         if (isset($token['access_token'])) {
             $client->setAccessToken($token['access_token']);
@@ -95,7 +95,6 @@ try {
     // Log the error and display a user-friendly message
     error_log($e->getMessage(), 3, 'errors.log');
     echo "An error occurred during authentication. Please try again.";
-    echo($e);
     exit();
 }
 ?>

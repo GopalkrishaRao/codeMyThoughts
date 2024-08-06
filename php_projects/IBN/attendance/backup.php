@@ -8,10 +8,10 @@ $dbname = "CMT_IBN";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die(json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]));
 }
 
-$locatonRange = 20;
+$locationRange = 20;
 
 // GPS Distance Calculation Function
 function calculateDistance($lat1, $lon1, $lat2, $lon2) {
@@ -44,26 +44,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $distance = calculateDistance($userLat, $userLng, $venueLat, $venueLng);
 
     $response = [];
-    if ($distance <= $locatonRange) { 
+    if ($distance <= $locationRange) { 
         // Update attendance record
         $updateQuery = "
             UPDATE attendance 
-            SET time_of_authentication = NOW(), attended_as = ?,
-            attendance_status = 'Present' 
+            SET time_of_authentication = NOW(), attended_as = ?, attendance_status = 'Present' 
             WHERE sl_no = ?
         ";
 
         $updateStmt = $conn->prepare($updateQuery);
         $updateStmt->bind_param("si", $memberType, $slNo);
-        $updateStmt->execute();
+        if ($updateStmt->execute()) {
+            $response['status'] = 'success';
+            $response['message'] = "You are within the venue. Marked as present.";
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = "Failed to mark attendance.";
+        }
         $updateStmt->close();
-
-        $response['message'] = "You are within the venue. Marked as present.";
     } else {
+        $response['status'] = 'error';
         $response['message'] = "You are not near the venue. Please come near the venue and try again.";
     }
 
     // Return the response as JSON
+    header('Content-Type: application/json');
     echo json_encode($response);
     exit;
 }
@@ -90,12 +95,7 @@ $chapterStatus = $chapterStatusResult->fetch_assoc()['chapter_status'];
 $chapterStatusStmt->close();
 
 if ($chapterStatus !== 'active') {
-    die("
-    <div class='emoji'>
-    <p>oops!! Your chapter is inactive Contact the Admin</p>
-        <img src='oops.jpg' alt='emoji' />
-    </div>
-    ");
+    die(json_encode(['status' => 'error', 'message' => "oops!! Your chapter is inactive Contact the Admin"]));
 }
 
 // Member details
@@ -105,7 +105,6 @@ $memberDetailsQuery = "
     WHERE member_id = ?
 ";
 
-// Prepare and execute the query
 $memberDetailsStmt = $conn->prepare($memberDetailsQuery);
 $memberDetailsStmt->bind_param("s", $member_id);
 $memberDetailsStmt->execute();
@@ -113,14 +112,8 @@ $memberDetailsResult = $memberDetailsStmt->get_result();
 $memberDetails = $memberDetailsResult->fetch_assoc();
 $memberDetailsStmt->close();
 
-// Check member status
 if ($memberDetails['member_status'] !== 'active') {
-die("
-    <div class='emoji'>
-    <p>oops!! You are an inactive member. Please contact your admin</p>
-        <img src='oops.jpg' alt='emoji' />
-    </div>
-    ");
+    die(json_encode(['status' => 'error', 'message' => "oops!! You are an inactive member. Please contact your admin"]));
 }
 
 $meetingsQuery = "
@@ -169,12 +162,13 @@ while ($row = $meetingsResult->fetch_assoc()) {
     $meetings[] = $row;
 }
 
-//Code to get current time 
 $timezone = new DateTimeZone('Asia/Kolkata');
 $currentDateTime = new DateTime('now', $timezone);
 $currentTime = $currentDateTime->format('H:i:s');
 $conn->close();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -305,7 +299,7 @@ $conn->close();
                         <div>
                             <button 
                                 onclick="attendAs('member', 
-                                <?php echo $meeting['sl_no']; ?>, 
+                                '<?php echo $meeting['sl_no']; ?>', 
                                 <?php echo $meeting['latitude']; ?>, 
                                 <?php echo $meeting['longitude']; ?>)"
                                 >
@@ -313,7 +307,7 @@ $conn->close();
                             </button>
                             <button 
                                 onclick="attendAs('substitute',
-                                <?php echo $meeting['sl_no']; ?>, 
+                                '<?php echo $meeting['sl_no']; ?>', 
                                 <?php echo $meeting['latitude']; ?>, 
                                 <?php echo $meeting['longitude']; ?>)">
                                 Substitute
@@ -332,9 +326,14 @@ $conn->close();
                     <p>Attendance system will start from <?php echo htmlspecialchars($attendanceStartTime); ?></p>
                 <?php } ?>
 
-                    <!-- <p class="failure_message">Your payment is due!!</p> -->
+            
+                    <!-- u can render any of the messgae according to the situation -->
+                    <!-- <p class="success_message"><i class="fa-solid fa-check"></i>Attendence marked</p> -->
+                    <p class="failure_message">Your payment is due!!</p>
            
                 </div>
+      
+
 
                 <!-- end time check -->
             <?php } ?>
@@ -349,50 +348,56 @@ $conn->close();
     <?php } ?>
 <!-- end new ui -->
 
-    <p id="message"></p>
-    <script>
-        function attendAs(memberType, slNo, venueLat, venueLng) {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    fetch('index.php', {
-                        // Replace 'your_php_file.php' with the actual filename
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ lat, lng, venueLat, venueLng, memberType, slNo })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('message').innerText = data.message;
-                    })
-                    .catch(error => {
-                        document.getElementById('message').innerText = "Error: " + error.message;
-                    });
-                }, showError);
-            } else {
-                document.getElementById('message').innerText = "Geolocation is not supported by this browser.";
-            }
-        }
-        function showError(error) {
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    document.getElementById('message').innerText = "User denied the request for Geolocation.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    document.getElementById('message').innerText = "Location information is unavailable.";
-                    break;
-                case error.TIMEOUT:
-                    document.getElementById('message').innerText = "The request to get user location timed out.";
-                    break;
-                case error.UNKNOWN_ERROR:
-                    document.getElementById('message').innerText = "An unknown error occurred.";
-                    break;
-            }
-        }
-    </script>
-    <script src="./js/script.js"></script>
+    <!-- <p id="message"></p> -->
+
+<script>
+       function attendAs(memberType, slNo, venueLat, venueLng) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            fetch('index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ lat, lng, venueLat, venueLng, memberType, slNo })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('message');
+                messageElement.innerText = data.message;
+                if (data.status === 'error' && data.message.includes("not near the venue")) {
+                    document.getElementById('attendace_fail').style.display = 'block';
+                } else {
+                    document.getElementById('attendace_fail').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                document.getElementById('message').innerText = "Error: " + error.message;
+            });
+        }, showError);
+    } else {
+        document.getElementById('message').innerText = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            document.getElementById('message').innerText = "User denied the request for Geolocation.";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            document.getElementById('message').innerText = "Location information is unavailable.";
+            break;
+        case error.TIMEOUT:
+            document.getElementById('message').innerText = "The request to get user location timed out.";
+            break;
+        case error.UNKNOWN_ERROR:
+            document.getElementById('message').innerText = "An unknown error occurred.";
+            break;
+    }
+}
+</script>
 </body>
 </html>

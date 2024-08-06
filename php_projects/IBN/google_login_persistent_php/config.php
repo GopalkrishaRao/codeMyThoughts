@@ -9,7 +9,7 @@ $dotenv->load();
 $clientID = $_ENV['GOOGLE_CLIENT_ID'];
 $clientSecret = $_ENV['GOOGLE_CLIENT_SECRET'];
 
-$redirectUri = 'http://localhost:8889/welcome.php';
+$redirectUri = 'http://localhost:8888/welcome.php';
 
 // Create Client Request to access Google API
 $client = new Google_Client();
@@ -18,6 +18,7 @@ $client->setClientSecret($clientSecret);
 $client->setRedirectUri($redirectUri);
 $client->addScope("email");
 $client->addScope("profile");
+$client->setPrompt('select_account'); // Add this line to prompt account selection every time
 
 // Connect to the new database
 $hostname = "127.0.0.1";
