@@ -57,10 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updateStmt->bind_param("si", $memberType, $slNo);
         $updateStmt->execute();
         $updateStmt->close();
-
+        
         $response['message'] = "You are within the venue. Marked as present.";
+        
     } else {
         $response['message'] = "You are not near the venue. Please come near the venue and try again.";
+    
     }
 
     // Return the response as JSON
@@ -91,10 +93,7 @@ $chapterStatusStmt->close();
 
 if ($chapterStatus !== 'active') {
     die("
-    <div class='emoji'>
-    <p>oops!! Your chapter is inactive Contact the Admin</p>
-        <img src='oops.jpg' alt='emoji' />
-    </div>
+    oops!! Your chapter is inactive Contact the Admin
     ");
 }
 
@@ -116,10 +115,7 @@ $memberDetailsStmt->close();
 // Check member status
 if ($memberDetails['member_status'] !== 'active') {
 die("
-    <div class='emoji'>
-    <p>oops!! You are an inactive member. Please contact your admin</p>
-        <img src='oops.jpg' alt='emoji' />
-    </div>
+   oops!! You are an inactive member. Please contact your admin
     ");
 }
 
@@ -294,13 +290,15 @@ $conn->close();
                     <div>
                         <p><b><?php echo htmlspecialchars($meeting['event_type']); ?> Meeting</b></p>
                         <p><?php echo htmlspecialchars($meeting['start_date']); ?></p>
+
+                        <p><?php echo htmlspecialchars($meeting['payment_status']); ?></p>
                     </div>
-                    
-                <p><?php echo htmlspecialchars($meeting['attendance_status']); ?></p>
+                <?php if (htmlspecialchars($meeting['payment_status'])==="Paid") { ?>   
+                
 
                 <?php $attendanceStartTime = $meeting['attendance_start_time']; ?>
                 <?php if ($attendanceStartTime <= $currentTime) { ?>
-                    <!--  -->
+                    <!-- hide attendace button if already put attendace -->
                     <?php if (htmlspecialchars($meeting['attendance_status'])==="Absent") { ?>
                         <div>
                             <button 
@@ -319,25 +317,29 @@ $conn->close();
                                 Substitute
                             </button>
                         </div>
-
-                    <!-- Payemnt status -->
                     <?php } else { ?>
                         <p class="success_message"><i class="fa-solid fa-check"></i>Attendence marked</p>
                      <?php } ?>
-
-                      <p id="attendace_fail" class="failure_message">
-                        Your are not near the location. Please come near the location and Try Again
-                      </p>
                 <?php } else { ?>
                     <p>Attendance system will start from <?php echo htmlspecialchars($attendanceStartTime); ?></p>
                 <?php } ?>
+                
 
-                    <!-- <p class="failure_message">Your payment is due!!</p> -->
+                <?php } else { ?>
+                    <p class="failure_message">
+                        Your payment is Due
+                      </p>
+                <?php } ?>
+                    
+                      <p id="attendace_fail" class="failure_message">
+                        Your are not near the location. Please come near the location and Try Again
+                      </p>
            
                 </div>
-
                 <!-- end time check -->
             <?php } ?>
+
+
             <!-- end foreach -->
         <?php } ?> 
         </div>
@@ -345,7 +347,11 @@ $conn->close();
     </div>
     
     <?php } else { ?>
-        <p>No meetings scheduled for today.</p>
+        <div class="card meetings">
+        <div class="card_heading">
+                <p>No meetings scheduled for today.</p>
+        </div>
+    </div>
     <?php } ?>
 <!-- end new ui -->
 
@@ -367,6 +373,14 @@ $conn->close();
                     .then(response => response.json())
                     .then(data => {
                         document.getElementById('message').innerText = data.message;
+                         if (data.message.includes("Marked as present")) {
+                        location.reload();
+                }
+                if(data.message.includes("You are not near the venue")){
+                            alert('test');
+                            document.getElementById('attendace_fail').style.display = "block";
+
+                        }
                     })
                     .catch(error => {
                         document.getElementById('message').innerText = "Error: " + error.message;
@@ -393,6 +407,5 @@ $conn->close();
             }
         }
     </script>
-    <script src="./js/script.js"></script>
 </body>
 </html>

@@ -166,7 +166,7 @@ body{
     color:red;
 }
 
-#attendace_fail {
+#attendace_fail, #message {
         display: none;
     }
 
