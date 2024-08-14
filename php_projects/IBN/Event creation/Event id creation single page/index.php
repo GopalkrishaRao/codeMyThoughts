@@ -81,6 +81,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Execute the statement
     if ($stmt->execute()) {
         echo "New event created successfully with Unique Event ID: $eventId";
+
+
+
+
+        // Newly add code
+         if ($eventType === 'national') {
+        // National event: select all members
+            $sql = "SELECT member_id FROM member";
+        } else {
+        // Chapter event: select members of the specified chapter
+            $chapterId = $conn->real_escape_string($chapterId);
+            $sql = "SELECT member_id FROM member WHERE chapter_id = '$chapterId'";
+        }
+        $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Prepare the statement to insert into attendance table
+        $attendanceStmt = $conn->prepare("INSERT INTO attendance (event_id, member_id, payment_status) VALUES (?, ?, 'Due')");
+        if ($attendanceStmt === FALSE) {
+            die("Error preparing attendance statement: " . $conn->error);
+        }
+
+        // Bind parameters
+        while ($row = $result->fetch_assoc()) {
+            $memberId = $row['member_id'];
+            $attendanceStmt->bind_param("ss", $eventId, $memberId);
+            if (!$attendanceStmt->execute()) {
+                die("Error executing attendance statement: " . $attendanceStmt->error);
+            }
+        }
+
+        $attendanceStmt->close();
+    }
+// end of new querry
+
+
+
     } else {
         die("Error executing statement: " . $stmt->error);
     }
