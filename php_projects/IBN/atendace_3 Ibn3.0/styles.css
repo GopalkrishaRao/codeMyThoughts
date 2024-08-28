@@ -1,0 +1,201 @@
+:root{
+    --Primary:#ff7d25;
+    --secondary:gray;
+    --button-hover:#ffb27e  ;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+  }
+
+body{
+    overflow-x: hidden;
+}
+
+.profile_header{
+    background: linear-gradient(150deg, #ff7d25 20%, #ffb27e  100%);;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile_image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border:2px solid white;
+}
+
+.logo {
+    position: absolute;
+    top: 120px;
+    left: 35%;
+    transform: translate(-50%, -50%); 
+    
+}
+
+.logo img {
+    width: 60px; /* Adjust size as needed */
+    height: 60px;
+    border-radius: 50%;
+    border:2px solid white;
+}
+
+.header_text{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 10px;
+    color: white;
+    
+}
+.name,.company{
+    font-size: 25px;
+}
+
+.member_id{
+    font-size: 20px;
+    margin:10px;
+    padding:10px;
+    display: flex;
+    justify-content: center;
+    border:2px solid var(--Primary);
+    border-radius: 8px;
+    color:var(--Primary) ;
+}
+
+.card{
+    margin:20px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.card_heading{
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.card_content{
+    padding:10px 20px;
+    display: flex;
+   align-items: center;
+    gap:10px;
+}
+
+.card_content i{
+    font-size: 25px;
+    color:var(--Primary);
+    margin-right: 20px;
+}
+
+.sub_heading{
+    font-size: 13px;
+    color:var(--secondary);
+}
+
+.card_content_list{
+    display: flex;
+    flex-direction: column;
+}
+
+.personal_details{
+    font-size: 18px;
+}
+
+.heading{
+    color:var(--secondary);
+    font-weight: 400;
+}
+
+.card_content button{
+    padding: 10px 15px;
+    border: none;
+    background-color: var(--Primary);
+    color:white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card_content button:hover{
+    background-color:var(--button-hover);
+}
+
+.meetings .card_content{
+    display: flex;
+    flex-direction: column;
+}
+
+.meeting_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:20px;
+    align-items: center;
+}
+
+.meeting_content div{
+    display: flex;
+    gap:20px
+}
+.success_message{
+    color:rgb(0, 128, 0);
+
+}
+
+.fail_message, #message, #fail_message{
+        display: none;
+        color: #ff0000;
+    }
+
+ table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+/* Tablet View */
+@media (min-width: 768px) {
+    .logo {
+        top: 120px;
+        left: 42%; 
+    }
+    .meeting_content{
+        flex-direction: row;
+        gap:30px;
+    }
+    .meetings .card_content{
+        justify-content: start;
+        align-items: start;
+    }
+
+}
+
+/* Small desktop styles (min-width: 992px) */
+@media (min-width: 992px) {
+
+    .logo {
+        left: 53%; 
+    }
+
+    
+   
+}
